@@ -47,7 +47,7 @@ const Bio = () => {
           안녕하세요, <strong>{author.name}</strong>입니다.
           <br /> 저는 {author?.summary || null}
           {` `}
-          <a href={`${social?.resume || ``}`}>&#x1F449; Resume</a>
+          <a href={social?.resume}>&#x1F449; Resume</a>
         </p>
       )}
     </div>
