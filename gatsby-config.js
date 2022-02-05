@@ -3,12 +3,12 @@ module.exports = {
     title: `LeeKR의 블로그`,
     author: {
       name: `Lee KR`,
-      summary: ``,
+      summary: `UI Developer && FE Beginner이고 CSS와 HTML을 중요하게 생각합니다.`,
     },
     description: `A starter blog demonstrating what Gatsby can do.`,
     siteUrl: `https://gatsbystarterblogsource.gatsbyjs.io/`,
     social: {
-      twitter: `kylemathews`,
+      twitter: ``,
     },
   },
   plugins: [
