@@ -44,11 +44,10 @@ const Bio = () => {
       />
       {author?.name && (
         <p>
-          <strong>{author.name}</strong>입니다. {author?.summary || null}
+          안녕하세요, <strong>{author.name}</strong>입니다.
+          <br /> 저는 {author?.summary || null}
           {` `}
-          <a href={`https://twitter.com/${social?.twitter || ``}`}>
-            You should follow them on Twitter
-          </a>
+          <a href={`${social?.resume || ``}`}>&#x1F449; Resume</a>
         </p>
       )}
     </div>
