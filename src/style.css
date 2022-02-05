@@ -266,7 +266,11 @@ a:focus > span {
 }
 
 .global-wrapper[data-is-root-path="true"] .bio {
-  margin-bottom: var(--spacing-20);
+  margin-bottom: var(--spacing-12);
+}
+
+.global-wrapper[data-is-root-path="true"] hr {
+  margin-bottom: var(--spacing-12);
 }
 
 .global-header {
@@ -340,6 +344,12 @@ a:focus > span {
 
 .gatsby-highlight {
   margin-bottom: var(--spacing-8);
+}
+
+.to-blog-main {
+  display: block;
+  text-align: center;
+  font-size: var(--fontSize-3);
 }
 
 /* Media queries */
