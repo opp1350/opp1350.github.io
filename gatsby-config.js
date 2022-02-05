@@ -1,14 +1,15 @@
 module.exports = {
   siteMetadata: {
-    title: `LeeKR의 블로그`,
+    title: `Small Log`,
     author: {
       name: `Lee KR`,
-      summary: `UI Developer && FE Beginner이고 CSS와 HTML을 중요하게 생각합니다.`,
+      summary: `UI Developer이고 Front-End 전반에 관심이 있습니다. HTML과 CSS를 소중하게 생각합니다.`,
     },
     description: `A starter blog demonstrating what Gatsby can do.`,
     siteUrl: `https://gatsbystarterblogsource.gatsbyjs.io/`,
     social: {
       twitter: ``,
+      resume: `https://vt-morgon.oopy.io/`,
     },
   },
   plugins: [
@@ -121,7 +122,7 @@ module.exports = {
         // https://css-tricks.com/meta-theme-color-and-trickery/
         // theme_color: `#663399`,
         display: `minimal-ui`,
-        icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
+        icon: `src/assets/hamster_1f439.png`, // This path is relative to the root of the site.
       },
     },
     `gatsby-plugin-react-helmet`,

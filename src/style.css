@@ -27,11 +27,12 @@
   --spacing-20: 5rem;
   --spacing-24: 6rem;
   --spacing-32: 8rem;
-  --fontFamily-sans: Montserrat, system-ui, -apple-system, BlinkMacSystemFont,
-    "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
-    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --fontFamily-serif: "Merriweather", "Georgia", Cambria, "Times New Roman",
-    Times, serif;
+  --fontFamily-sans: Montserrat, "NotoSansKR", system-ui, -apple-system,
+    BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans",
+    sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+    "Noto Color Emoji";
+  --fontFamily-serif: "Merriweather", "NotoSansKR", "Georgia", Cambria,
+    "Times New Roman", Times, serif;
   --font-body: var(--fontFamily-serif);
   --font-heading: var(--fontFamily-sans);
   --fontWeight-normal: 400;
@@ -54,7 +55,8 @@
   --fontSize-5: 2.074rem;
   --fontSize-6: 2.488rem;
   --fontSize-7: 2.986rem;
-  --color-primary: #005b99;
+  /* --color-primary: #005b99; */
+  --color-primary: #0016ff;
   --color-text: #2e353f;
   --color-text-light: #4f5969;
   --color-heading: #1a202c;
@@ -73,6 +75,7 @@
 html {
   line-height: var(--lineHeight-normal);
   font-size: var(--fontSize-root);
+  letter-spacing: -0.03rem;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -81,6 +84,12 @@ body {
   font-family: var(--font-body);
   font-size: var(--fontSize-1);
   color: var(--color-text);
+  background: linear-gradient(
+      to bottom,
+      rgb(239 242 244 / 0.8),
+      rgb(255 255 255 / 0.1)
+    ),
+    url(https://grainy-gradients.vercel.app/noise.svg);
 }
 
 footer {
@@ -233,9 +242,18 @@ a {
   color: var(--color-primary);
 }
 
+a > span {
+  transition: all 0.2s ease-in-out;
+}
+
 a:hover,
 a:focus {
   text-decoration: none;
+}
+
+a:hover > span,
+a:focus > span {
+  filter: blur(2px);
 }
 
 /* Custom classes */
