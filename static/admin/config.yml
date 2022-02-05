@@ -5,14 +5,17 @@ backend:
 locale: "ko"
 site_url: https://vt-morgon-blog.netlify.app/
 
+media_folder: "static/images/uploads"
+public_folder: "/images/uploads"
+
 collections:
   - name: "blog"
     label: "Blog"
     folder: "content/blog"
     create: true
     slug: "index"
-    media_folder: "static/images/uploads"
-    public_folder: "/images/uploads"
+    media_folder: ""
+    public_folder: ""
     path: "{{title}}/index"
     editor:
       preview: false
