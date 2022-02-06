@@ -1,8 +1,6 @@
 // custom typefaces
 import "typeface-montserrat"
 import "typeface-merriweather"
-// fonts
-import "./src/font.css"
 // normalize CSS across browsers
 import "./src/normalize.css"
 // custom CSS styles
