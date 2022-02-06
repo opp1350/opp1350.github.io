@@ -1,7 +1,8 @@
 ---
-title: Gatsby + Netlify + Netlify CMS로 블로그를 만들어 보았습니다.
+title: 2022 블로그 생성
 date: 2022-02-05T15:42:26.225Z
-description: 이것은 Netlify CMS를 연결해 작성하는 최초의 게시글입니다.
+description: Gatsby + Netlify + Netlify CMS로 블로그를 만들어 보았습니다. 이것은 Netlify CMS를
+  연결해 작성하는 최초의 게시글입니다.
 tags:
   - 개발
 ---
