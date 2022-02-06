@@ -53,11 +53,9 @@ tags:
 
 ## Tabindex
 
-참고 링크 : 
+참고 링크 1) [ https://developer.mozilla.org/ko/docs/Web/HTML/Global_attributes/tabindex](https://developer.mozilla.org/ko/docs/Web/HTML/Global_attributes/tabindex) , 
 
-<https://developer.mozilla.org/ko/docs/Web/HTML/Global_attributes/tabindex>
-
-<https://developer.mozilla.org/ko/docs/Web/Accessibility/ARIA>
+참고 링크 2) <https://developer.mozilla.org/ko/docs/Web/Accessibility/ARIA>
 
 * `tabindex="-1"`은 키보드로는 접근할 수 없지만 JavaScript나 시각적(마우스 클릭)으로는 포커스 가능함을 뜻한다. 즉 상호작용이 불가한 요소들은 기본적으로 `tabindex="-1"`의 값을 가진다.
 * `<a>`, `<button>`, `<details>`, `<input>`, `<select>`, `<textarea>` 와 같이 기본적으로 상호작용이 가능한 요소들은 `tabindex="0"` 이 기본값이다. 0 이상의 값은 임의로 TAB의 순서를 정할 때 사용한다. (그러나 사용하지 않는 것을 권고하고 있다. 할 수 있다면 문서의 순서를 논리적으로 배치하자.)
