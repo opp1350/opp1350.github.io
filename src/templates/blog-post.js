@@ -4,6 +4,7 @@ import { Link, graphql } from "gatsby"
 import Bio from "../components/bio"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
+import Comment from "../components/comments"
 
 const BlogPostTemplate = ({ data, location }) => {
   const post = data.markdownRemark
@@ -30,6 +31,7 @@ const BlogPostTemplate = ({ data, location }) => {
           itemProp="articleBody"
         />
         <hr />
+        <Comment repo="opp1350/vt-morgon-blog-comments" theme="github-light" />
         <footer>
           <Bio />
         </footer>
