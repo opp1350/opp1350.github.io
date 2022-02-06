@@ -53,13 +53,13 @@ tags:
 
 ## Tabindex
 
-참고 링크 1) [ https://developer.mozilla.org/ko/docs/Web/HTML/Global_attributes/tabindex](https://developer.mozilla.org/ko/docs/Web/HTML/Global_attributes/tabindex) , 
+참고 링크 1) [Tabindex](https://developer.mozilla.org/ko/docs/Web/HTML/Global_attributes/tabindex)
 
-참고 링크 2) <https://developer.mozilla.org/ko/docs/Web/Accessibility/ARIA>
+참고 링크 2) [ARIA](https://developer.mozilla.org/ko/docs/Web/Accessibility/ARIA)
 
 * `tabindex="-1"`은 키보드로는 접근할 수 없지만 JavaScript나 시각적(마우스 클릭)으로는 포커스 가능함을 뜻한다. 즉 상호작용이 불가한 요소들은 기본적으로 `tabindex="-1"`의 값을 가진다.
 * `<a>`, `<button>`, `<details>`, `<input>`, `<select>`, `<textarea>` 와 같이 기본적으로 상호작용이 가능한 요소들은 `tabindex="0"` 이 기본값이다. 0 이상의 값은 임의로 TAB의 순서를 정할 때 사용한다. (그러나 사용하지 않는 것을 권고하고 있다. 할 수 있다면 문서의 순서를 논리적으로 배치하자.)
 * `tabindex="4"`는 `tabindex="5"`의 값을 가진 요소보다 먼저, 그러나 `tabindex="3"`의 값을 가진 요소 이후에 접근할 수 있다. 만약 `tabindex="0"`인 요소들과 섞여있다면 양의 정수값( 0 < n )을 가진 요소부터 접근한다. 같은 값을 가졌다면 문서의 소스 코드 순서를 따른다. 
-* 모질라 문서에서는 `div`나 `span` 같은 비대화형 요소에 tabindex를 추가하는 것을 지양하라고 안내한다. 상호작용이 가능한 태그들은 기본적으로 접근성과 관련된 기능을 내장하고 있기 때문이다. 따라서 가능하다면 의미가 있는 태그를 사용하는 것이 좋다. 그러나 조금 어려운 상황이라면 ARIA를 사용해서 접근성을 고려할 수도 있다.  
+* 모질라 문서에서는 `div`나 `span` 같은 비대화형 요소에 tabindex를 추가하는 것을 지양하라고 안내한다. 상호작용이 가능한 태그들은 기본적으로 접근성과 관련된 기능을 내장하고 있기 때문이다. 따라서 가능하다면 의미가 있는 태그를 사용하는 것이 좋다. 그러나 상호작용이 가능한 태그를 사용하기 어려운 상황이라면 ARIA를 사용해서 접근성을 고려할 수 있다.  
 
 ARIA에 대해서는 나중에 한번 정리를 하고 싶다.
