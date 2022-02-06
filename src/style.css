@@ -338,6 +338,11 @@ a:focus > span {
   margin: var(--spacing-0);
 }
 
+.blog-post p code[class*="language-"],
+pre[class*="language-"] {
+  word-break: break-all;
+}
+
 .gatsby-highlight {
   margin-bottom: var(--spacing-8);
 }
