@@ -23,6 +23,8 @@
   --spacing-8: 2rem;
   --spacing-10: 2.5rem;
   --spacing-12: 3rem;
+  --spacing-13: 3.25rem;
+  --spacing-14: 3.5rem;
   --spacing-16: 4rem;
   --spacing-20: 5rem;
   --spacing-24: 6rem;
@@ -239,18 +241,15 @@ a {
   color: var(--color-primary);
 }
 
-a > span {
-  transition: all 0.2s ease-in-out;
-}
-
 a:hover,
 a:focus {
   text-decoration: none;
 }
 
-a:hover > span,
-a:focus > span {
-  filter: blur(2px);
+a:hover,
+a:focus {
+  background-color: rgb(0 22 255 / 0.75);
+  color: #fff;
 }
 
 /* Custom classes */
@@ -280,7 +279,7 @@ a:focus > span {
 
 .post-list-item {
   margin-bottom: var(--spacing-8);
-  margin-top: var(--spacing-8);
+  margin-top: var(--spacing-14);
 }
 
 .post-list-item p {
@@ -289,7 +288,8 @@ a:focus > span {
 
 .post-list-item h2 {
   font-size: var(--fontSize-2);
-  color: var(--color-primary);
+  /* color: var(--color-primary); */
+  color: var(--color-heading);
   margin-bottom: var(--spacing-2);
   margin-top: var(--spacing-0);
 }
