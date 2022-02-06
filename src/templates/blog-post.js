@@ -23,7 +23,7 @@ const BlogPostTemplate = ({ data, location }) => {
         itemType="http://schema.org/Article"
       >
         <header>
-          <h1 itemProp="headline">{post.frontmatter.title}</h1>
+          <h1 itemProp="headline">&#x1F4CC; {post.frontmatter.title}</h1>
           <p>{post.frontmatter.date}</p>
         </header>
         <section
