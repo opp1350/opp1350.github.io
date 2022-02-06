@@ -339,7 +339,7 @@ a:focus > span {
 }
 
 .blog-post *:not(.gatsby-highlight) code[class*="language-"],
-pre[class*="language-"] {
+.blog-post *:not(.gatsby-highlight) pre[class*="language-"] {
   word-break: break-all;
 }
 
