@@ -338,7 +338,7 @@ a:focus > span {
   margin: var(--spacing-0);
 }
 
-.blog-post p code[class*="language-"],
+.blog-post *:not(.gatsby-highlight) code[class*="language-"],
 pre[class*="language-"] {
   word-break: break-all;
 }
