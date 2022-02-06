@@ -21,7 +21,7 @@ tags:
 
 확인해보니 이 블로그의 마크업은 구조적이다.(theme이니까!) 참고로 파이어폭스 개발자도구에서 css를 전부 비활성할 수 있는 기능을 제공한다.
 
-+ 그리고 개인적으로 사용하고 있는 구글 확장도구 [HeadingsMap](https://chrome.google.com/webstore/detail/headingsmap/flbjommegcjonpdmenkdiocclhjacmbi?hl=ko) 있다. 웹의 근본적인 정체(?)는 문서이기 때문에 헤딩 넘버를 잘 맞춰주는 것만으로도 어느 정도는 컨텐츠의 중요 순서(레벨)를 정리할 수 있다.
+그리고 개인적으로 사용하고 있는 [HeadingsMap](https://chrome.google.com/webstore/detail/headingsmap/flbjommegcjonpdmenkdiocclhjacmbi?hl=ko) 이라는 크롬 확장도구가 있다. 웹의 근본적인 정체(?)는 문서이기 때문에 헤딩 넘버를 잘 맞춰주는 것만으로도 어느 정도는 컨텐츠의 중요 순서(레벨)를 정리할 수 있다.
 
 ![HeadingsMap 사용 예시](캡처2.png)
 
@@ -39,7 +39,7 @@ tags:
 
 ## Skip Navigation
 
-부끄럽지만 나도 스킵 네비게이션이 필요하다는 것을 최근에 알게 되었다. 
+부끄럽지만 나 스킵 네비게이션이 필요하다는 것을 최근에 알게 되었다. 
 
 메뉴가 많은 복잡한 사이트의 경우, 스크린리더기 사용자들은 매번 많은 메뉴를 하나하나 넘겨야한다. 이런 불편함을 개선하기 위해 메인 컨텐츠로 바로 이동할 수 있도록 도와주는 것이 스킵 네비게이션이다.
 
