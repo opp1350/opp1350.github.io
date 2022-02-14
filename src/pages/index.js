@@ -36,7 +36,10 @@ const BlogIndex = ({ data, location }) => {
                 itemType="http://schema.org/Article"
               >
                 <header>
-                  <span className="category">{post.frontmatter.tags}</span>
+                  {post.frontmatter.tags !== "" ||
+                  post.frontmatter.tags ? null : (
+                    <span className="category">{post.frontmatter.tags}</span>
+                  )}
                   <h2>
                     <Link to={post.fields.slug} itemProp="url">
                       <span itemProp="headline">{title}</span>

@@ -23,7 +23,9 @@ const BlogPostTemplate = ({ data, location }) => {
         itemType="http://schema.org/Article"
       >
         <header>
-          <span className="category">{post.frontmatter.tags}</span>
+          {post.frontmatter.tags !== "" || post.frontmatter.tags ? null : (
+            <span className="category">{post.frontmatter.tags}</span>
+          )}
           <h1 itemProp="headline">{post.frontmatter.title}</h1>
           <p>{post.frontmatter.date}</p>
         </header>
