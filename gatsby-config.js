@@ -5,8 +5,8 @@ module.exports = {
       name: `Lee KR`,
       summary: `UI Developer이고 Front-End 전반에 관심이 있습니다. HTML과 CSS를 소중하게 생각합니다.`,
     },
-    description: `A starter blog demonstrating what Gatsby can do.`,
-    siteUrl: `https://gatsbystarterblogsource.gatsbyjs.io/`,
+    description: `Lee KR의 개발 블로그입니다.`,
+    siteUrl: `https://vt-morgon-blog.netlify.app/`,
     social: {
       twitter: ``,
       resume: `https://vt-morgon.oopy.io/`,
