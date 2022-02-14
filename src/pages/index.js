@@ -36,10 +36,17 @@ const BlogIndex = ({ data, location }) => {
                 itemType="http://schema.org/Article"
               >
                 <header>
-                  {post.frontmatter.tags !== "" ||
-                  post.frontmatter.tags ? null : (
-                    <span className="category">{post.frontmatter.tags}</span>
-                  )}
+                  {post.frontmatter.tags && post.frontmatter.tags.length > 0 ? (
+                    <ol className="categories">
+                      {post.frontmatter.tags.map(tag => {
+                        return (
+                          <li className="categories-item" key={tag}>
+                            {tag}
+                          </li>
+                        )
+                      })}
+                    </ol>
+                  ) : null}
                   <h2>
                     <Link to={post.fields.slug} itemProp="url">
                       <span itemProp="headline">{title}</span>
