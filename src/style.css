@@ -298,10 +298,27 @@ a:focus {
   margin-bottom: var(--spacing-4);
 }
 
-.post-list-item .category {
-  display: inline-block;
-  margin-bottom: var(--spacing-1);
+.categories {
+  list-style: none;
+  margin-bottom: var(--spacing-2);
   color: var(--color-text-light);
+}
+
+.categories-item {
+  display: inline-block;
+  margin: 0;
+}
+
+.categories-item::after {
+  display: inline-block;
+  margin: 0 var(--spacing-2);
+  content: "/";
+}
+
+.categories-item:last-child::after {
+  display: none;
+  margin: 0;
+  content: none;
 }
 
 .header-link-home {
