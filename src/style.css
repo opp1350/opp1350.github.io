@@ -298,6 +298,12 @@ a:focus {
   margin-bottom: var(--spacing-4);
 }
 
+.post-list-item .category {
+  display: inline-block;
+  margin-bottom: var(--spacing-1);
+  color: var(--color-text-light);
+}
+
 .header-link-home {
   font-weight: var(--fontWeight-bold);
   font-family: var(--font-heading);
