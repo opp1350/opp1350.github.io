@@ -11,13 +11,20 @@ tags:
 그리고 값을 입력 받기 위한 설정을 따로 해줘야 하는데 매번 찾기 번거로우니 여기에 하나하나 추가하며 정리를 하겠다. 
 
 ```
-const fs = require('fs'); // 공통
+const fs = require('fs');
 // 하나의 값만 입력 받을 때
 const input = fs.readFileSync('/dev/stdin').toString().trim();
 
 // n개의 값을 한줄로 입력 받을 때
-const input = fs.readFileSync('/dev/stdin').toString().trim().split(' 
+const input = fs.readFileSync('/dev/stdin').toString().trim().split(' '); 
 
 // 2개의 값을 각각 한줄에 입력 받을 때
 const input = fs.readFileSync('/dev/stdin').toString().trim().split('\n');
+
+// n개의 값을 2줄 이상으로 받을 때
+const input = fs.readFileSync('/dev/stdin').toString().trim().split('\n');
+const firstLineVal = input[0].split(' '); 
+const a = firstLineVal[0];
+const b = firstLineVal[1];
+const c = input[1]; // 2번째 줄의 필요값이 1개일 경우
 ```
