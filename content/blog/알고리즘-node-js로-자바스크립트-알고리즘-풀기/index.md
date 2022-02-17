@@ -8,12 +8,13 @@ tags:
 ---
 백준에는 자바스크립트가 없으므로 언어를 node.js로 설정한 뒤 문제를 풀어야 한다. 
 
-그리고 값을 입력 받기 위한 설정을 따로 해줘야 하는데 매번 찾기 번거로우니 여기에 하나하나 추가하며 정리를 하겠다. 
+그리고 값을 입력 받기 위한 설정을 따로 해줘야 하는데 매번 찾기 번거로우니 여기에 하나하나 추가하며 정리를 하겠다. (개인 참고용)
 
-```
-const fs = require('fs');
+
+```javascript
+// const fs = require('fs');
 // 하나의 값만 입력 받을 때
-const input = fs.readFileSync('/dev/stdin').toString().trim();
+const input = require('fs').readFileSync('/dev/stdin').toString().trim();
 
 // n개의 값을 한줄로 입력 받을 때
 const input = fs.readFileSync('/dev/stdin').toString().trim().split(' '); 
