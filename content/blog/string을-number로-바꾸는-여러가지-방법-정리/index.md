@@ -13,6 +13,10 @@ tags:
 
 ### 1) Number vs parseInt
 
+
+
+#### 둘의 간단하고 제일 큰 차이
+
 만약 문자열(예: "1234")이 **숫자**로만 구성되어 있다면 Number를 사용했든 parseInt를 사용했든 같은 결과(예: 1234)를 출력한다. 
 
 그런데 문자열에 숫자가 아닌 문자(예: "~입니다.")가 섞여 있다면 Number는 NaN(숫자가 아님, Not-A-Number)를 출력하는 반면에 parseInt은 앞의 숫자(정수) "1234"만을 골라 숫자로 반환한다.  
@@ -27,6 +31,10 @@ console.log(parseInt(test)); // 1234
 console.log(Number(test2)); // NaN
 console.log(parseInt(test2)); // 1234
 ```
+
+
+
+### parseInt를 자세하게 알아보자.
 
 그런데! 모질라 문서를 참고하면 parseInt가 NaN을 반환하는 경우는 2가지 있다고 한다. 
 
@@ -70,15 +78,30 @@ parseInt('546', 2);   // 0과 1을 제외한 숫자는 2진법에서 유효하�
 
 
 
-## 2) 연산자를 이용한 변환
+#### 그렇다면 Number는?
 
-솔직히 간편하긴   
+Number는 parseInt에 비하면 좀 더 간편히 사용할 수 있다. 
+
+진수 값을 매개변수로 받지도 않는다. 물론 Number도 받을 수 있는 최대, 최소 값이 존재하지만 9007199254740991이상이나 -9007199254740991이하의 값을 넣을 일은 거의 없을 것이다.. 
+
+
+
+### 2) 연산자를 이용한 변환
+
+간편하지만 좋은 방법인지는 모르겠다. + 연산자를 많이 이용하는 이유는 아래의 방법 중에서 가장 가독성이 있어서? 
 
 ```javascript
 let test = "4";
 console.log(test*1); // 4
 console.log(test/1); // 4
 console.log(+test); // 4 => 보기 깔끔해서 제일 보편적으로 사용되는 듯 하다.
-console.log(test+0); // "40"이 나옴. 이 방법은 불가하다. 
 console.log(test-0); // 4
+
+// 불가능한 방법
+console.log(-test); // 당연히 -4 가 나온다. 사용 불가
+console.log(test+0); // "40"이 나옴. 이 방법은 불가하다.
 ```
+
+
+
+### 3) Math.floor()를 이용한
