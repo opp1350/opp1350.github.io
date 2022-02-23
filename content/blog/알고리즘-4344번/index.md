@@ -24,8 +24,6 @@ tags:
 
 아래는 나의 답변이다. 답이 맞기는 한데 뭔가 썩 아름답지 않아 보인다. 일단 for문 안에 똑같은 조건의 for문이 두 개나 들어가 있다.
 
-정녕 다른 방법은 없는 것인지? 다른 사람의 답변을 조금 찾아보았다.  
-
 ```javascript
 const input = require('fs').readFileSync('/dev/stdin').toString().trim().split('\n');
 const testNum = Number(input[0]); // 테스트 케이스의 수
@@ -49,6 +47,8 @@ for(let i = 1 ; i <= testNum; i++) {
 ```
 
 
+
+정녕 다른 방법은 없는 것인지? 다른 답변을 조금 찾아보았는데, 많은 사람들이 for문과 reduce()를 함께 사용했다는  것을 알았다. 
 
 배열의 총 합을 구할 때 for문을 용하는 것도 나쁘지 않지만,
 
