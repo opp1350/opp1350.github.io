@@ -14,10 +14,10 @@ tags:
 
 [SUIT](https://sunn.us/suit/)
 
-내가 비교하기 좋게 캡쳐 해봄. 
+내가 비교하기 좋게 캡쳐 해봄. SUIT와 Pretendard의 눈에 띄는 차이는 숫자와 라틴 문자의 디자인이다. 마음에 드는 쪽을 사용하면 됨.
+
+아름다운 한글 폰트를 위해 노력해주신 디자이너분에게 감사 인사를 드립니다...
 
 ![Noto Sans KR](noto.jpg "Noto Sans KR")
 
 ![SUIT and Pretendard](suit_pretendard.jpg "SUIT and Pretendard")
-
-SUIT와 Pretendard의 눈에 띄는 차이는 숫자와 라틴 문자의 디자인이다. 원하는 것을 사용하면
