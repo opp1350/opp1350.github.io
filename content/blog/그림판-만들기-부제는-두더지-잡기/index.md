@@ -190,8 +190,6 @@ const convasMouseMove = (e) => {
 
 드디어! 원이 아름답게 그려진다... !! 
 
-
-
 ## 나를 가장 곤란하게 했던 지우개 툴
 
 지우개를 만들기 전에 스스로 정한 규칙이다.
@@ -201,19 +199,19 @@ const convasMouseMove = (e) => {
 
 아직은 이미지 확장자를 선택할 수 없지만(기본 jpg), 추후에 png로 저장할 경우를 위해 되도록 지우개인 척을 하는 하얀색 펜의 사용을 지양해야한다. 
 
-지우개는 globalCompositeOperation이라는 옵션중에서 destination-out을 이용하여 제작했다. 
+지우개는 `globalCompositeOperation`이라는 옵션중에서 `destination-out`을 이용하여 제작했다. 
 
-[globalCompositeOperation 모질라 문서](<https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/globalCompositeOperation>)
+[globalCompositeOperation 모질라 문서](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/globalCompositeOperation)
 
-모질라 문서를 참고하면, 기본 설정은 source-over라는 것을 알 수 있다. source-over는 기본적으로 우리가 그림을 그릴 때처럼 이전에 그린 것 위에 이후에 그린 것이 얹어진다는 것을 의미한다.  
+모질라 문서를 참고하면 ctx의 `globalCompositeOperation` 기본 옵션은 `source-over`라는 것을 알 수 있다. `source-over`는 기본적으로 우리가 그림을 그릴 때처럼 이전에 그린 것 위에 이후에 그린 것이 얹어진다는 것을 의미한다.  
 
-그런데 destination-out은 기존의 컨텐츠에 이후의 컨텐츠가 겹칠 경우, 겹치는(오버랩 되는) 부분이 사라짐을 의미한다.  
+그런데 `destination-out`은 기존의 컨텐츠에 이후의 컨텐츠가 겹칠 경우, 겹치는(오버랩 되는) 부분이 사라짐을 의미한다.  
 
 > destination-out : The existing content is kept where it doesn't overlap the new shape.
 
+해당 속성을 이용하여 지우개 코드를 작성하면 다음과 같다. 여기서 헷갈리지 말아야 할 것은 그림을 그릴 수 있는  `canvas`가 아니라 그림이 나타나는 캔버스 (작업 내역이 저장됨)인 `tempCtx`에 path가 그려져야 한다. 왜냐하면.. clearRect때문에 ctx에는 아무런 path가 없기 때문이다. 
 
-
-해당 속성을 이용하려   
+지우개를 사용한 뒤에는 반드시 tempCtx.globalCompositeOperation를 source-over로 변경해 주는 것을 잊지 말 자...! source-over로 원복하는 코드는 다른 곳애  
 
 ```javascript
 const convasMouseMove = (e) => {
@@ -225,5 +223,12 @@ const convasMouseMove = (e) => {
         }
         // ... 중략
     }
+};
+
+// mouseup, mouseleave
+const notPaint = (e) => {
+    painting = false
+    tempCtx.globalCompositeOperation = "source-over"; // 초기화
+    imgUpdate();
 };
 ```
