@@ -28,13 +28,13 @@ HTML, CSS, Javascript을 이용해 그림판을 만들 기회가 생겼다.
 
 ## 도형 툴 만들기
 
-기본적으로  mousedown, mousemove 이벤트를 이용하여 현재 마우스의 좌표를 구한다. 이후 구해진 좌푯값을 이용해 canvas위에 stroke(혹은 기타 그리는 메소드)를 사용하면 canvas위에 마우스를 따라 원하는 그림 그려진다.
+기본적으로  mousedown, mousemove 이벤트를 이용하여 현재 마우스의 좌표를 구한다. 이후 구해진 좌푯값을 이용해 canvas위에 stroke(혹은 기타 그리는 메소드)를 사용하면 canvas위에 마우스를 따라 원하는 그림이 그려진다.
 
-펜 툴 + 지우개 툴 만 있는 그림판은 만들기가 간단하다. 그런데 여기서 도형 툴을 추가하면 도형이 중첩되어 그려지기 때문에 상황이 조금 복잡해진다. 
+펜 + 지우개만 있는 그림판은 만들기 간단하다. 그런데 여기서 도형 툴을 추가하면 상황이 조금 복잡해진다. 이렇게...!
 
 ![도형 툴 만들기 - example 1](rect_ellipse.png "도형 툴 만들기 - example 1")
 
-물론 fill을 이용해 중첩된 부분을 가리면 되지만 말 그대로 문제를 가리는 것일 뿐이지 해결책이 아니다. 
+물론 fill을 이용해 중첩된 부분을 가리면 되지만... 문제를 가리는 것일 뿐이지 해결책이라고 할 수 없다.
 
 ```javascript
 const convasMouseMove = (e) => {
@@ -63,7 +63,7 @@ const convasMouseMove = (e) => {
 };
 ```
 
-마우스 이벤트가 매번 발생하기 때문에 마지막에 그려진 도형을 제외한 나머지를 지우려면 어쩔 수 없이 clearRect를 사용해 캔버스를 지워야 한다. 
+마우스 이벤트는 도형을 그리는 동안 계속 발생하기 때문에 마지막에 그려진 도형을 제외한 나머지를 지우려면  clearRect를 사용해 캔버스를 비워줘야 한다.
 
 ### Rectangle
 
@@ -82,9 +82,9 @@ const convasMouseMove = (e) => {
 };
 ```
 
-clearRect를 추가하면 직사각형이 중첩되어 나타나지는 않지만, 사각형을 그릴 때마다 이전 작업물이 전부 없어져 버리는 새로운 문제가 발생한다.
+clearRect를 추가하면 도형이 중첩되어 나타나지는 않지만, 사각형을 그릴 때마다 이전 작업물이 전부 없어져 버리는 새로운 문제가 발생한다. 
 
-이를 해결하기 위해서 ( 작업 내용을 저장할 수 있고 && clearRect 대상이 아닌 ) 또 다른 캔버스를 하나 생성했다.
+이를 해결하기 위해서( 작업 내용을 저장할 수 있고 && clearRect 대상이 아닌 ) 또 다른 캔버스를 하나 생성하기로 했다. 
 
 ```javascript
 // html
@@ -127,13 +127,13 @@ const ctx = canvas.getContext("2d");
 
 캔버스를 하나 더 생성한 뒤,  `canvas`에서 작업한 내용을 `tempCanvas`로 옮겨주는 함수를 작성하고 mouseup, mouseleave를 할 때마다 작업물이 업데이트 될 수 있도록 해당 이벤트에 함수를 추가한다.
 
-2개의 캔버스가 겹쳐져 있어 무언가를 그리면 약간 어색해 보이므로 clearRect를 이용해 `canvas`를 매번 초기화 해준다. 
+2개의 캔버스가 겹쳐져 있어 무언가를 그리면 약간 어색해 보이므로 clearRect를 이용해 `canvas`를  초기화 해준다. 
 
 ```javascript
 const imgUpdate = () => {
     // 보여지는 tempCtx에 canvas를 update
     tempCtx.drawImage(canvas, 0, 0);
-    // clearRect를 하지 않으면 선이 2개로 겹쳐보임
+    // clearRect를 하지 않으면 선이 2개로 겹쳐 보임
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 };
 
@@ -144,7 +144,7 @@ const notPaint = (e) => {
 };
 ```
 
-겹친 캔버스를 양옆으로 펼쳐 놓으면 어떤 방식으로 그림이 그려지는지 좀 더 명확하게 이해될 것이다. (아래의 이미지 참고)
+겹친 캔버스를 양옆으로 펼쳐 놓으면 어떤 방식으로 그림이 그려지는지 좀 더 명확하게 이해할 수 있다. (아래의 이미지 참고)
 
 ![도형 툴 만들기 - example 2](drawing_on_html_-_chrome_2022-03-07_18-56-26_adobecreativecloudexpress-1-.gif "도형 툴 만들기 - example 2")
 
@@ -155,19 +155,19 @@ const notPaint = (e) => {
 1. 마우스를 움직이면 타원이 중복하여 그려짐 (rectangle과 동일한 현상)
 2. 마우스를 클릭한 상태에서 여러 방향으로 움직이면 타원이 모여서 다른 도형이 그려진다. (1번 문제와 유사하지만 살짝 다름) 
 
-\=> 이 두 문제는 하나의 Path로 원이 그려졌기 때문에 발생했다. 
+\=> 이 두 문제는 하나의 Path로 원이 그려졌기 때문에 발생한 것이다.
 
 ![도형 툴 만들기 - example 3](drawing_on_html_-_chrome_2022-03-07_19-09-53_adobecreativecloudexpress.gif "도형 툴 만들기 - example 3")
 
-모양이 닫혀있는 직사각형과 달리 타원은 (놀랍게도) 닫히지 않는다. 도형의 모양은 직사각형과 동일하게 닫힌 것 처럼 보이지만 ellipse() 메소드는 조금 다르게 동작하는 것 같다. 
+모양이 닫혀있는 직사각형과 달리 타원은 (놀랍게도) 닫히지 않는다. 직사각형과 동일하게 닫힌 것처럼 보이지만 ellipse() 메소드는 조금 다르게 동작하는 것 같다. 
 
-이들을 끊어주기 위해서는 beginPath()를 사용해 원이 그려질 때마다 새로운 패스를 생성해야 한다.\
+beginPath()를 사용해 원이 그려질 때마다 새로운 패스를 생성하자.
 \
 아래의 이미지와 같이 원과 원이 하나의 Path로 연결되어 있었다면...
 
 ![도형 툴 만들기 - example 4](ellipse.png "도형 툴 만들기 - example 4")
 
-이렇게 별개의 원으로 분리된다.
+beginPath() 추가 후에는 이렇게 별개의 원으로 분리된다.
 
 ![도형 툴 만들기 - example 5](ellipse2.png "도형 툴 만들기 - example 5")
 
@@ -205,21 +205,21 @@ const convasMouseMove = (e) => {
 
 ![지우개 툴 만들기 - example 0](eraser_4.png "지우개 툴 만들기 - example 0")
 
-clearRect는 Path가 아니기 때문에 익숙한 지우개 툴처럼 동작하지 않는다. Path를 사용하여 선을 그릴 때처럼 자연스럽게 움직이면서도 기존 컨텐츠를 완전히 지울 수 있는 방법이 없을까?
+clearRect는 Path가 아니기 때문에 지우개 툴처럼 동작하지 않는다. 펜 툴처럼 부드럽게 움직이며 기존의 컨텐츠를 완전히(투명하게) 지울 수 있는 방법이 없을까?
 
-다른 방법을 찾아보던 중에 ctx옵션으로 `globalCompositeOperation`이라는 것을 발견했다.
+방법을 찾아보던 중에 ctx옵션 중 `globalCompositeOperation`이라는 것을 발견했다.
 
 [globalCompositeOperation 모질라 문서](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/globalCompositeOperation)
 
-모질라 문서를 참고하면 ctx의 `globalCompositeOperation` 기본 옵션은 `source-over`라고 한다. `source-over`는 기본적으로 우리가 그림을 그릴 때처럼 이전에 그린 것 위에 이후에 그린 것이 얹어진다는 것을 의미한다.
+모질라 문서를 참고하면 ctx의 `globalCompositeOperation` 기본 값은 `source-over`라고 한다. `source-over`는 평소에 우리가 그림을 그릴 때처럼 이전에 그린 것 위에 이후에 그린 것이 얹어진다는 것을 의미한다.
 
-그런데 `destination-out`으로 설정을 변경하면 겹치는(오버랩 되는) 부분은 사라진다.
+그런데 `destination-out`으로 설정을 변경하면 겹치는(오버랩 되는) 부분은 투명하게 사라진다.
 
 > destination-out : The existing content is kept where it doesn't overlap the new shape.
 
-이런 아름다운 속성을 이용하여 지우개를 만들기로 했고, 작성한 코드는 다음과 같다. 
+이것을 이용해 지우개 기능을 만들기로 했고, 작성한 코드는 다음과 같다. 
 
-**여기서 헷갈리지 말아야 할 것**은 그림을 그릴 수 있는  `canvas`가 아니라 그림이 나타나는(=작업 내역이 저장되는) 캔버스인 `tempCnavas`에 path가 그려져야 한다. 왜냐하면 clearRect 때문에 ctx에는 어떠한 path도 없기 때문이다. 
+**여기서 헷갈리지 말아야 할 것**은 그림을 그릴 수 있는  `canvas`가 아니라 그림이 나타나는(=작업 내역이 저장되는) 캔버스인 `tempCnavas`에 path가 그려져야 한다는 것이다. 왜냐하면 `canvas`에는 어떠한 path도 없기 때문이다.
 
 지우개를 사용한 뒤에는 반드시 `tempCtx.globalCompositeOperation`를 `source-over`로 변경해 주는 것을 잊지 말 자...! (`source-over`로 원복하는 코드는 더 좋은 곳에 추가해도 된다.)
 
@@ -251,13 +251,13 @@ const notPaint = (e) => {
 
 여기까지는 그다지 곤란하지 않았다. 지우개와 도형 툴은 완벽해 보였다.
 
-그런데... 그린 그림을 저장하는 기능을 만들고 보니 저장된 그림이 어딘가 이상했다. 지우개로 지운 투명한 부분이  검은색으로 나타났던 것이다...
+그런데... 그린 그림을 저장하는 기능을 만들고 보니 저장된 그림이 어딘가 이상했다. 지우개로 지운 투명한 부분이  검은색으로 나타났던 것이다.
 
 ![지우개 툴 만들기 - example 2](eraser_2.png "지우개 툴 만들기 - example 2")
 
-png라면 아무런 문제가 없겠지만 jpg라면 아무래도 신경이 쓰이는 부분이다. 그려진 그림**(원본)은 변경하지 않으면서** 저장할 때 "**투명한 부분**" 흰색으로 변경할 수 없을까? 
+png라면 아무런 문제가 없겠지만 jpg라면 아무래도 신경이 쓰이는 부분이다. 저장할 때 "**투명한 부분**" 흰색으로 변경할 수 없을까? 이때 그려진 그림(원본)은 변경되지 말아야 한다. (강제로 배경을 흰색으로 매꾼다든지.. 시도해보았으나 결국 또 다른 문제가 발생한다.)
 
-여러 방법을 시도하고 찾아보다가 [스택오버플로우의 멋진 답변](https://stackoverflow.com/questions/32160098/change-html-canvas-black-background-to-white-background-when-creating-jpg-image)을 참고하게 되었다.  이 방법이 여태 시도한 방법 중에서 가장 간단하고 깔끔한 것 같다. 
+열심히 삽질을 하다가 [스택오버플로우의 멋진 답변](https://stackoverflow.com/questions/32160098/change-html-canvas-black-background-to-white-background-when-creating-jpg-image)을 참고하게 되었다.  이 방법이 여태 시도한 방법 중에서 가장 간단하고 깔끔한 것 같다. 
 
 1. 먼저 cloneNode로 캔버스 하나를 복사한다. (cloneNode는 appendChild()와 같은 메소드를 이용하지 않는다면 말 그대로 복사만 된다. 참고 : [모질라 문서](https://developer.mozilla.org/ko/docs/Web/API/Node/cloneNode))
 2. 복사한 `newCanvas`를 흰색으로 채운다. 어떤 캔버스를 Clone해도 상관없는 이유는 어차피 흰색으로 전체를 칠해야 하기 때문이다.
