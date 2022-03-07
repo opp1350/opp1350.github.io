@@ -121,7 +121,6 @@ const tempCtx = tempCanvas.getContext("2d");
 // 실제로 그림을 그릴 수 있는 캔버스
 const canvas = document.getElementById("tempCanvas");
 const ctx = canvas.getContext("2d");
-
 ```
 
 캔버스를 하나 더 생성한 뒤,  `canvas`에서 작업한 내용을 `tempCanvas`로 옮겨주는 함수를 작성하고 mouseup, mouseleave를 할 때마다 작업물이 업데이트 될 수 있도록 해당 이벤트에 함수를 추가한다.
@@ -295,3 +294,15 @@ const download = () => {
 
 친구들이 직접 사용하면서 이상한 부분을 알려주었다. 기능이 별로 없긴 하지만 덕분에 이것 저것 고칠 수 있었다. 
 만든 무언가를 공유하는 것은 언제나 즐겁다.
+
+### \~받은 작품들\~
+
+![ Masterpiece 1](photo_2022-03-07_23-02-10.jpg " Masterpiece 1")
+
+![ Masterpiece 2](ulijyb4p.jpg " Masterpiece 2")
+
+
+
+이건 내가 테스트하며 그린 것
+
+![ Masterpiece 3](fnoa82oacaatj5l.jpg " Masterpiece 3")
