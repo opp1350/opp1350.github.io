@@ -26,8 +26,6 @@ HTML, CSS, Javascript을 이용해 그림판을 만들 기회가 생겼다.
 
 만들면서 어려웠던 부분은 도형 툴과 지우개 기능이었는데, 사실상 이 둘 덕분에 코드가 2배는 길어졌다고 할 수 있다. 글의 부제를 두더지 잡기로 정한 이유도 어디 하나를 고치면 다른 어딘가에서 문제가 발생했기 때문이다. 
 
-
-
 ## 도형 툴 만들기
 
 기본적으로  mousedown, mousemove 이벤트를 이용하여 현재 마우스의 좌표를 구한다. 이후 구해진 좌표 값을 이용해 canvas위에 stroke(혹은 기타 그리는 메소드)를 사용하면 canvas위에 마우스를 따라 원하는 그림 그려진다.
@@ -150,8 +148,6 @@ const notPaint = (e) => {
 
 ![도형 툴 만들기 - example 2](drawing_on_html_-_chrome_2022-03-07_18-56-26_adobecreativecloudexpress-1-.gif "도형 툴 만들기 - example 2")
 
-
-
 ### Ellipse
 
 이제 타원도 예쁘게 그려보자. 어색한 점은 두가지였다.
@@ -203,4 +199,31 @@ const convasMouseMove = (e) => {
 1. 하얀색 펜은 지우개가 아니다.
 2. 지우개를 사용하면 영역이 반드시 "지워"져야 한다. 하얀색으로 덧칠하지 말 것.
 
-당장 
+아직은 이미지 확장자를 선택할 수 없지만(기본 jpg), 추후에 png로 저장할 경우를 위해 되도록 지우개인 척을 하는 하얀색 펜의 사용을 지양해야한다. 
+
+지우개는 globalCompositeOperation이라는 옵션중에서 destination-out을 이용하여 제작했다. 
+
+[globalCompositeOperation 모질라 문서](<https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/globalCompositeOperation>)
+
+모질라 문서를 참고하면, 기본 설정은 source-over라는 것을 알 수 있다. source-over는 기본적으로 우리가 그림을 그릴 때처럼 이전에 그린 것 위에 이후에 그린 것이 얹어진다는 것을 의미한다.  
+
+그런데 destination-out은 기존의 컨텐츠에 이후의 컨텐츠가 겹칠 경우, 겹치는(오버랩 되는) 부분이 사라짐을 의미한다.  
+
+> destination-out : The existing content is kept where it doesn't overlap the new shape.
+
+
+
+해당 속성을 이용하려   
+
+```javascript
+const convasMouseMove = (e) => {
+        // ... 중략
+        } else if (tool === "eraser") {
+            tempCtx.globalCompositeOperation = "destination-out";
+            tempCtx.lineTo(x, y);
+            tempCtx.stroke();
+        }
+        // ... 중략
+    }
+};
+```
