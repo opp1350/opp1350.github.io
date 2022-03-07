@@ -122,7 +122,6 @@ const tempCtx = tempCanvas.getContext("2d");
 const canvas = document.getElementById("tempCanvas");
 const ctx = canvas.getContext("2d");
 
-// 
 ```
 
 캔버스를 하나 더 생성한 뒤,  `canvas`에서 작업한 내용을 `tempCanvas`로 옮겨주는 함수를 작성하고 mouseup, mouseleave를 할 때마다 작업물이 업데이트 될 수 있도록 해당 이벤트에 함수를 추가한다.
@@ -255,7 +254,7 @@ const notPaint = (e) => {
 
 ![지우개 툴 만들기 - example 2](eraser_2.png "지우개 툴 만들기 - example 2")
 
-png라면 아무런 문제가 없겠지만 jpg라면 아무래도 신경이 쓰이는 부분이다. 저장할 때 "**투명한 부분**" 흰색으로 변경할 수 없을까? 이때 그려진 그림(원본)은 변경되지 말아야 한다. (강제로 배경을 흰색으로 매꾼다든지.. 시도해보았으나 결국 또 다른 문제가 발생한다.)
+png라면 아무런 문제가 없겠지만 jpg라면 아무래도 신경이 쓰이는 부분이다. 저장할 때 "**투명한 부분**" 흰색으로 변경할 수 없을까? 이때 그려진 그림(원본)은 변경되지 말아야 한다. (강제로 배경을 흰색으로 메꿔보았으나 결국 또 다른 문제가 발생한다.)
 
 열심히 삽질을 하다가 [스택오버플로우의 멋진 답변](https://stackoverflow.com/questions/32160098/change-html-canvas-black-background-to-white-background-when-creating-jpg-image)을 참고하게 되었다.  이 방법이 여태 시도한 방법 중에서 가장 간단하고 깔끔한 것 같다. 
 
