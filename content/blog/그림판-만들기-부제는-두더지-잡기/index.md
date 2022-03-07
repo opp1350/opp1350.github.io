@@ -148,17 +148,43 @@ const notPaint = (e) => {
 
 
 
-이제 타원도 예쁘게 그려보자. 어색한 점은 두가지 였다.
+이제 타원도 예쁘게 그려보자. 어색한 점은 두가지였다.
 
-1) 마우스를 움직이면 타원이 중복하여 그려짐
+1. 마우스를 움직이면 타원이 중복하여 그려짐
+2. 마우스를 클릭한 상태에서 여러 방향으로 움직이면 타원이 모여 결국 다른 도형이 그려진다. (1번 문제와 유사) 
 
-2) 마우스를 클릭한 상태에서 여러 방향으로 움직이면 타원이 모여 결 다른 도형이 그려진다. (1번 문제와 유사) 
+![도형 툴 만들기 - example 3](drawing_on_html_-_chrome_2022-03-07_19-09-53_adobecreativecloudexpress.gif "도형 툴 만들기 - example 3")
 
-\=> path가 끊기지 않아 발생하는 문제로  
+path가 끊기지 않아 발생하는 문제로 추정되었으므로 beginPath()를 사용해 매번 새로운 패스를 생성해 주었다. 
 
-![도형 툴 만들기 - example 3](ellipse.png "도형 툴 만들기 - example 3")
+그러면 아래와 같이 원이 하나의 Path로 이어져 있던 것이 (원과 원을 연결하는 선이 있다.)
 
+![도형 툴 만들기 - example 4](ellipse.png "도형 툴 만들기 - example 4")
 
+요렇게 하나하나 분리 된다. 
+
+![도형 툴 만들기 - example 5](ellipse2.png "도형 툴 만들기 - example 5")
+
+이제 직사각형 툴을 만들었던 방식 동일하게 clearRect를 추가하여 마지막 타원을 제외한 나머지 타원을 지워준다. 
+
+```javascript
+const convasMouseMove = (e) => {
+        // ... 중략
+        } else if (tool === "ellipse") {
+            ctx.beginPath(); // 없으면 마우스를 따라 원이 중첩되며 출력
+            ctx.ellipse(figureX, figureY, w, h, Math.PI * 2, 0, Math.PI * 2);
+            // 이전의 내역을 지우는 코드를 추가함.
+            ctx.clearRect(0, 0, canvasWidth, canvasHeight); // 
+            ctx.stroke();
+        }
+        // ... 중략
+    }
+};
+```
+
+![도형 툴 만들기 - example 6](ellipse3.png "도형 툴 만들기 - example 6")
+
+드디어! 원이 아름답게 그려진다... !! 
 
 
 
