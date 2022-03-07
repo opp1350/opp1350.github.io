@@ -209,9 +209,9 @@ const convasMouseMove = (e) => {
 
 > destination-out : The existing content is kept where it doesn't overlap the new shape.
 
-해당 속성을 이용하여 지우개 코드를 작성하면 다음과 같다. 여기서 헷갈리지 말아야 할 것은 그림을 그릴 수 있는  `canvas`가 아니라 그림이 나타나는 캔버스 (작업 내역이 저장됨)인 `tempCtx`에 path가 그려져야 한다. 왜냐하면.. clearRect때문에 ctx에는 아무런 path가 없기 때문이다. 
+해당 속성을 이용하여 지우개 코드를 작성하면 다음과 같다. **여기서 헷갈리지 말아야 할 것**은 그림을 그릴 수 있는  `canvas`가 아니라 그림이 나타나는(=작업 내역이 저장되는) 캔버스인 `tempCnavas`에 path가 그려져야 한다. 왜냐하면.. clearRect때문에 ctx에는 아무런 path가 없기 때문이다. 
 
-지우개를 사용한 뒤에는 반드시 tempCtx.globalCompositeOperation를 source-over로 변경해 주는 것을 잊지 말 자...! source-over로 원복하는 코드는 다른 곳애  
+지우개를 사용한 뒤에는 반드시 `tempCtx.globalCompositeOperation`를 `source-over`로 변경해 주는 것을 잊지 말 자...! (`source-over`로 원복하는 코드는 더 좋은 곳에 추가해도 된다.)
 
 ```javascript
 const convasMouseMove = (e) => {
@@ -232,3 +232,11 @@ const notPaint = (e) => {
     imgUpdate();
 };
 ```
+
+![지우개 툴 만들기 - example 1](eraser.png "지우개 툴 만들기 - example 1")
+
+✨예쁘게 지워진다. 
+
+### 지우개와 관련된 문제 
+
+.. 그런데 또 다른 문제를 발견하게 .
