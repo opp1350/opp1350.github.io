@@ -198,6 +198,10 @@ li > p + p {
   margin-top: var(--spacing-1);
 }
 
+li > p {
+  display: inline-block;
+}
+
 li > p,
 li *:last-child {
   margin-bottom: var(--spacing-0);
@@ -402,5 +406,8 @@ a:focus {
   ul,
   ol {
     list-style-position: inside;
+  }
+  .blog-post img {
+    max-width: 100%;
   }
 }
