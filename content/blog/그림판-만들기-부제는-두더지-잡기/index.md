@@ -201,17 +201,23 @@ const convasMouseMove = (e) => {
 
 아직은 이미지 확장자를 선택할 수 없지만(기본 jpg), png로 저장할 경우를 위해 되도록 지우개인 척을 하는 하얀색 펜의 사용을 지양하기로 했다. (그리고 전직 미술 강사로서 화이트와 지우개를 동일한 것으로 여길 수 없다.)
 
-지우개는 `globalCompositeOperation`이라는 옵션중, `destination-out`을 이용하여 제작하기로 했다.
+처음에는 마우스 위치에 라인 굵기 만큼의 영역을 clearRect로 지워보려고 했다. 뭔가 잘 될 것 같았지만 예상과는 달리 캡쳐 이미지와 같은 동작을 보여줬다. 
+
+![지우개 툴 만들기 - example 0](eraser_4.png "지우개 툴 만들기 - example 0")
+
+clearRect는 Path가 아니기 때문에 익숙한 지우개 툴처럼 동작하지 않는다. Path를 사용하여 선을 그릴 때처럼 자연스럽게 움직이면서도 기존 컨텐츠를 완전히 지울 수 있는 방법이 없을까?
+
+다른 방법을 찾아보던 중에 ctx옵션으로 `globalCompositeOperation`이라는 것을 발견했다.
 
 [globalCompositeOperation 모질라 문서](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/globalCompositeOperation)
 
-모질라 문서를 참고하면 ctx의 `globalCompositeOperation` 기본 옵션은 `source-over`라고 한다. `source-over`는 기본적으로 우리가 그림을 그릴 때처럼 이전에 그린 것 위에 이후에 그린 것이 얹어진다는 것을 의미한다.  
+모질라 문서를 참고하면 ctx의 `globalCompositeOperation` 기본 옵션은 `source-over`라고 한다. `source-over`는 기본적으로 우리가 그림을 그릴 때처럼 이전에 그린 것 위에 이후에 그린 것이 얹어진다는 것을 의미한다.
 
-그런데 `destination-out`으로 설정을 변경하면 기존의 컨텐츠에 이후의 컨텐츠가 겹칠 경우, 겹치는(오버랩 되는) 부분이 사라진다.
+그런데 `destination-out`으로 설정을 변경하면 겹치는(오버랩 되는) 부분은 사라진다.
 
 > destination-out : The existing content is kept where it doesn't overlap the new shape.
 
-해당 속성을 이용하여 지우개 코드를 작성하면 다음과 같다. 
+이런 아름다운 속성을 이용하여 지우개를 만들기로 했고, 작성한 코드는 다음과 같다. 
 
 **여기서 헷갈리지 말아야 할 것**은 그림을 그릴 수 있는  `canvas`가 아니라 그림이 나타나는(=작업 내역이 저장되는) 캔버스인 `tempCnavas`에 path가 그려져야 한다. 왜냐하면 clearRect 때문에 ctx에는 어떠한 path도 없기 때문이다. 
 
