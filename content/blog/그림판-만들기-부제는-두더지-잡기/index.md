@@ -253,9 +253,9 @@ const notPaint = (e) => {
 
 ![지우개 툴 만들기 - example 2](eraser_2.png "지우개 툴 만들기 - example 2")
 
-png라면 아무런 문제가 없겠지만 jpg라면 아무래도 신경이 쓰이는 부분이다. 저장할 때 "**투명한 부분**" 흰색으로 변경할 수 없을까? 이때 그려진 그림(원본)은 변경되지 말아야 한다. (강제로 배경을 흰색으로 메꿔보았으나 결국 또 다른 문제가 발생한다.)
+png라면 아무런 문제가 없겠지만 jpg라면 아무래도 신경이 쓰이는 부분이다. 저장할 때 "**투명한 부분**"만 흰색으로 변경할 수 없을까? 이때 그려진 그림(원본)은 변경되지 말아야 한다. (강제로 배경을 흰색으로 메꿔보았으나 결국 또 다른 문제가 발생한다.)
 
-열심히 삽질을 하다가 [스택오버플로우의 멋진 답변](https://stackoverflow.com/questions/32160098/change-html-canvas-black-background-to-white-background-when-creating-jpg-image)을 참고하게 되었다.  이 방법이 여태 시도한 방법 중에서 가장 간단하고 깔끔한 것 같다. 
+삽질을 하다가 [스택오버플로우의 멋진 답변](https://stackoverflow.com/questions/32160098/change-html-canvas-black-background-to-white-background-when-creating-jpg-image)을 참고하게 되었다.  이 방법이 여태 시도한 방법 중에서 가장 간단하고 깔끔한 것 같다. 
 
 1. 먼저 cloneNode로 캔버스 하나를 복사한다. (cloneNode는 appendChild()와 같은 메소드를 이용하지 않는다면 말 그대로 복사만 된다. 참고 : [모질라 문서](https://developer.mozilla.org/ko/docs/Web/API/Node/cloneNode))
 2. 복사한 `newCanvas`를 흰색으로 채운다. 어떤 캔버스를 Clone해도 상관없는 이유는 어차피 흰색으로 전체를 칠해야 하기 때문이다.
@@ -300,8 +300,6 @@ const download = () => {
 ![ Masterpiece 1](photo_2022-03-07_23-02-10.jpg " Masterpiece 1")
 
 ![ Masterpiece 2](ulijyb4p.jpg " Masterpiece 2")
-
-
 
 이건 내가 테스트하며 그린 것
 
