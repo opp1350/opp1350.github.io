@@ -239,5 +239,50 @@ const notPaint = (e) => {
 
 ### 지우개와 관련된 문제
 
-여기까지는 그다지 곤란하지 않았다. 지우개와 도형툴은  \
-이후 그린 그림을 저장하는 기능을 만들었는데, 저장된 그림이 어딘가 이상했다.
+여기까지는 그다지 곤란하지 않았다. 지우개와 도형툴은 완벽해 보였다.
+
+그런데.. 그린 그림을 저장하는 기능을 만들고 보니 저장된 그림이 어딘가 이상했다. 지우개로 지운 투명한 부분이 jpg에서는 검정색으로 나타나는 것이다...
+
+![지우개 툴 만들기 - example 2](eraser_2.png "지우개 툴 만들기 - example 2")
+
+png라면 아무런 문제가 없겠지만 jpg로 저장한다면 아무래도 신경쓰인다. 그려진 그림**(원본)은 변경하지 않으면서** 저장할 때 "**투명한 부분**" 흰색으로 변경할 수 없을까? 
+
+여러가지 방법을 시도하고 찾아보다가 [스택오버플로우의 멋진 답변](https://stackoverflow.com/questions/32160098/change-html-canvas-black-background-to-white-background-when-creating-jpg-image)을 참고하게 되었다.  이 방법이 여태 시도한 방법 중에서 가장 간단하고 깔끔한 것 같다. 
+
+1. 먼저 cloneNode로 캔버스 하나를 복사한다. (cloneNode는 appendChild()와 같은 메소드를 이용하지 않는다면 말 그대로 복사만 된다. 참고 : [모질라 문서](https://developer.mozilla.org/ko/docs/Web/API/Node/cloneNode))
+2. 복사한 `newCanvas`를 흰색으로 채운다. 어떤 캔버스를 Clone해도 상관없는 이유는 어차피 흰색으로 전체를 칠해야 하기 때문이다.
+3. 이후 drawImage를 이용해 그림이 나타나는(=작업 내역이 저장되는) `tempCanvas`를 `newCanvas`에 복사한다. 
+4. `newCanvas`의 데이터를 다운로드 받으면 완료!!
+
+```javascript
+const download = () => {
+    const newCanvas = canvas.cloneNode(true); // 아무 캔버스 복사
+    const newCanvasCtx = newCanvas.getContext("2d");
+    newCanvasCtx.fillStyle = "#FFF";
+    newCanvasCtx.fillRect(0, 0, canvasWidth, canvasHeight);
+    newCanvasCtx.drawImage(tempCanvas, 0, 0);
+    const img = newCanvas.toDataURL("image/jpeg", 1);
+    const link = document.createElement("a");
+    link.href = img;
+    link.download = "my_awesome_painting";
+    link.click();
+};
+```
+
+![지우개 툴 만들기 - example 3](eraser_3.png "지우개 툴 만들기 - example 3")
+
+투명한 부분이 아름답게 채워진 것을 볼 수 있다. 
+
+
+
+\====================
+
+만들면서 조금 어려웠던 부분을 정리해 보았다. 더 좋은 방법이 있을 수 있지만.. 최선을 다했다. 
+
+더 만들고 싶은 기능은
+* 작업 취소 (like Ctrl + z)
+* jpg, png 선택하여 저장하기
+* 이미지를 로드할 때 위치 선택 (현재 중앙 정렬만 가능)
+* 터치로도 그릴 수 있게 (현재 마우스 이벤트로만 가능)
+
+일단 이 정도이다. 즐겁게 만들었다.
