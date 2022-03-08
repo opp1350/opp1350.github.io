@@ -194,12 +194,29 @@ ol li {
   margin-bottom: calc(var(--spacing-8) / 2);
 }
 
-li > p + p {
-  margin-top: var(--spacing-1);
+ul {
+  list-style: none;
 }
 
-li > p {
-  display: inline-block;
+ul li {
+  position: relative;
+  padding-left: var(--spacing-3);
+}
+
+ul li::before {
+  position: absolute;
+  display: block;
+  left: 0;
+  top: calc(1rem / 2 + 2px);
+  width: 4px;
+  height: 4px;
+  background-color: var(--color-text);
+  border-radius: 50%;
+  content: "";
+}
+
+li > p + p {
+  margin-top: var(--spacing-1);
 }
 
 li > p,
