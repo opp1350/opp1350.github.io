@@ -194,27 +194,6 @@ ol li {
   margin-bottom: calc(var(--spacing-8) / 2);
 }
 
-ul {
-  list-style: none;
-}
-
-ul li {
-  position: relative;
-  padding-left: var(--spacing-3);
-}
-
-ul li::before {
-  position: absolute;
-  display: block;
-  left: 0;
-  top: calc(1rem / 2 + 2px);
-  width: 4px;
-  height: 4px;
-  background-color: var(--color-text);
-  border-radius: 50%;
-  content: "";
-}
-
 li > p + p {
   margin-top: var(--spacing-1);
 }
@@ -388,6 +367,27 @@ a:focus {
 
 .blog-post hr {
   margin: var(--spacing-20) var(--spacing-0) var(--spacing-6) var(--spacing-0);
+}
+
+.blog-post ul {
+  list-style: none;
+}
+
+.blog-post ul li {
+  position: relative;
+  padding-left: var(--spacing-3);
+}
+
+.blog-post ul li::before {
+  position: absolute;
+  display: block;
+  left: 0;
+  top: calc(1rem / 2 + 2px);
+  width: 4px;
+  height: 4px;
+  background-color: var(--color-text-light);
+  border-radius: 50%;
+  content: "";
 }
 
 .blog-post-nav ul {
