@@ -125,7 +125,7 @@ const ctx = canvas.getContext("2d");
 
 캔버스를 하나 더 생성한 뒤,  `canvas`에서 작업한 내용을 `tempCanvas`로 옮겨주는 함수를 작성하고 mouseup, mouseleave를 할 때마다 작업물이 업데이트 될 수 있도록 해당 이벤트에 함수를 추가한다.
 
-2개의 캔버스가 겹쳐져 있어 무언가를 그리면 약간 어색해 보이므로 clearRect를 이용해 `canvas`를  초기화 해준다. 
+이때 무언가를 그리면 2개의 캔버스가 겹쳐져 있어서 선이 두꺼워 보이는 등 뭔가 어색해 보일 것이다. clearRect를 이용해 `canvas`를 초기화 하자.
 
 ```javascript
 const imgUpdate = () => {
@@ -148,7 +148,7 @@ const notPaint = (e) => {
 
 ### Ellipse
 
-이제 타원도 예쁘게 그려보자. 어색한 점은 두 가지였다.
+타원을 그릴 때 어색한 점은 두 가지였다.
 
 1. 마우스를 움직이면 타원이 중복하여 그려짐 (rectangle과 동일한 현상)
 2. 마우스를 클릭한 상태에서 여러 방향으로 움직이면 타원이 모여서 다른 도형이 그려진다. (1번 문제와 유사하지만 살짝 다름) 
@@ -178,7 +178,7 @@ const convasMouseMove = (e) => {
             ctx.beginPath(); // 없으면 마우스를 따라 원이 중첩되며 출력
             ctx.ellipse(figureX, figureY, w, h, Math.PI * 2, 0, Math.PI * 2);
             // 이전의 내역을 지우는 코드를 추가함.
-            ctx.clearRect(0, 0, canvasWidth, canvasHeight); // 
+            ctx.clearRect(0, 0, canvasWidth, canvasHeight);
             ctx.stroke();
         }
         // ... 중략
@@ -217,9 +217,9 @@ clearRect는 Path가 아니기 때문에 지우개 툴처럼 동작하지 않는
 
 이것을 이용해 지우개 기능을 만들기로 했고, 작성한 코드는 다음과 같다. 
 
-**여기서 헷갈리지 말아야 할 것**은 그림을 그릴 수 있는  `canvas`가 아니라 그림이 나타나는(=작업 내역이 저장되는) 캔버스인 `tempCnavas`에 path가 그려져야 한다는 것이다. 왜냐하면 `canvas`에는 어떠한 path도 없기 때문이다.
+**여기서 헷갈리지 말아야 할 것**은 그림을 그릴 수 있는  `canvas`가 아니라 그림이 나타나는(=작업 내역이 저장되는) 캔버스인 `tempCnavas`에 path가 그려져야 한다는 것이다. `canvas`에는 어떠한 path도 없으므로 선을 아무리 그어도 그림이 지워지지 않는다.
 
-지우개를 사용한 뒤에는 반드시 `tempCtx.globalCompositeOperation`를 `source-over`로 변경해 주는 것을 잊지 말 자...! (`source-over`로 원복하는 코드는 더 좋은 곳에 추가해도 된다.)
+지우개를 사용한 뒤에는 반드시 `tempCtx.globalCompositeOperation`를 `source-over`로 변경해 주는 것을 잊지 말자...! (`source-over`로 원복하는 코드는 더 좋은 곳에 추가해도 된다.)
 
 ```javascript
 const convasMouseMove = (e) => {
