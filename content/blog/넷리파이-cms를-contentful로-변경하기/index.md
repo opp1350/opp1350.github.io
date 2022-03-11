@@ -10,7 +10,7 @@ tags:
 
 [https://keen-kilby-a8f92d.netlify.app](https://keen-kilby-a8f92d.netlify.app/)
 
-CMS 변경 테스트용 브랜치를 배포한 주소이다. 추후 메인 브랜치와 합칠 예정!
+위의 링크는 CMS 변경 테스트용 브랜치를 배포한 주소이다. 추후 메인 브랜치와 합칠 예정! 지금 예전글부터 먼저 보이는 문제를 해결하지 못해서... 머지를 못하고 있다.... 
 
 왜 바꾸게 되었는지는 [\>여기<](https://keen-kilby-a8f92d.netlify.app/post21) 에 작성했다. 브랜치를 합치면 링크의 글도 함께 블로그에 반영 될 것이다.
 
