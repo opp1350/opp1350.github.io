@@ -11,17 +11,6 @@ exports.createPages = async ({ page, graphql, actions, reporter }) => {
   const result = await graphql(
     `
       {
-        allMarkdownRemark(
-          sort: { fields: [frontmatter___date], order: ASC }
-          limit: 1000
-        ) {
-          nodes {
-            id
-            fields {
-              slug
-            }
-          }
-        }
         allContentfulVtMorgonBlog {
           edges {
             node {

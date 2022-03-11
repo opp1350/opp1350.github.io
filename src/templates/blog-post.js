@@ -11,8 +11,6 @@ const BlogPostTemplate = ({ data, location, pageContext }) => {
   const siteTitle = data.site.siteMetadata?.title || `Title`
   const postNav = data.allContentfulVtMorgonBlog.edges[pageContext.postIndex]
   const { previous, next } = postNav
-  console.log(previous)
-  console.log(next)
   return (
     <Layout location={location} title={siteTitle}>
       <Seo title={post.title} description={post.description || post.excerpt} />
@@ -92,7 +90,7 @@ export const pageQuery = graphql`
       title
       slug
       description
-      date
+      date(formatString: "YYYY, MMMM DD")
       tags
       blogContent {
         childMarkdownRemark {

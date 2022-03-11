@@ -80,14 +80,14 @@ export const pageQuery = graphql`
         title
       }
     }
-    allContentfulVtMorgonBlog {
+    allContentfulVtMorgonBlog(sort: { fields: date }) {
       edges {
         node {
           id
           title
           slug
           description
-          date
+          date(formatString: "YYYY, MMMM DD")
           tags
           blogContent {
             childMarkdownRemark {
