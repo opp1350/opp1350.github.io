@@ -80,7 +80,7 @@ export const pageQuery = graphql`
         title
       }
     }
-    allContentfulVtMorgonBlog(sort: { fields: date }) {
+    allContentfulVtMorgonBlog(sort: { fields: date, order: DESC }) {
       edges {
         node {
           id

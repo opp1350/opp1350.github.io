@@ -11,7 +11,7 @@ exports.createPages = async ({ page, graphql, actions, reporter }) => {
   const result = await graphql(
     `
       {
-        allContentfulVtMorgonBlog {
+        allContentfulVtMorgonBlog(sort: { fields: date, order: DESC }) {
           edges {
             node {
               id
