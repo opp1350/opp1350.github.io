@@ -398,6 +398,10 @@ a:focus {
   word-break: break-all;
 }
 
+.blog-post img {
+  max-width: 100%;
+}
+
 .blog-post *:not(.gatsby-highlight) code[class*="language-"],
 .blog-post *:not(.gatsby-highlight) pre[class*="language-"] {
   word-break: break-all;

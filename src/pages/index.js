@@ -6,8 +6,8 @@ import Layout from "../components/layout"
 import Seo from "../components/seo"
 
 const BlogIndex = ({ data, location }) => {
+  const posts = data.allContentfulVtMorgonBlog.edges
   const siteTitle = data.site.siteMetadata?.title || `Title`
-  const posts = data.allMarkdownRemark.nodes
 
   if (posts.length === 0) {
     return (
@@ -25,22 +25,22 @@ const BlogIndex = ({ data, location }) => {
       <Bio />
       <hr />
       <ol style={{ listStyle: `none` }}>
-        {posts.map(post => {
-          const title = post.frontmatter.title || post.fields.slug
+        {posts.map((post, index) => {
+          const title = post.node.title || `Title`
 
           return (
-            <li key={post.fields.slug}>
+            <li key={index}>
               <article
                 className="post-list-item"
                 itemScope
                 itemType="http://schema.org/Article"
               >
                 <header>
-                  {post.frontmatter.tags && post.frontmatter.tags.length > 0 ? (
+                  {post.node.tags && post.node.tags !== null ? (
                     <ol className="categories">
-                      {post.frontmatter.tags.map(tag => {
+                      {post.node.tags.map((tag, index) => {
                         return (
-                          <li className="categories-item" key={tag}>
+                          <li className="categories-item" key={index}>
                             {tag}
                           </li>
                         )
@@ -48,16 +48,16 @@ const BlogIndex = ({ data, location }) => {
                     </ol>
                   ) : null}
                   <h2>
-                    <Link to={post.fields.slug} itemProp="url">
+                    <Link to={post.node.slug} itemProp="url">
                       <span itemProp="headline">{title}</span>
                     </Link>
                   </h2>
-                  <small>{post.frontmatter.date}</small>
+                  <small>{post.node.date}</small>
                 </header>
                 <section>
                   <p
                     dangerouslySetInnerHTML={{
-                      __html: post.frontmatter.description || post.excerpt,
+                      __html: post.node.description || post.excerpt,
                     }}
                     itemProp="description"
                   />
@@ -80,17 +80,20 @@ export const pageQuery = graphql`
         title
       }
     }
-    allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
-      nodes {
-        excerpt
-        fields {
-          slug
-        }
-        frontmatter {
-          date(formatString: "MMMM DD, YYYY")
+    allContentfulVtMorgonBlog(sort: { fields: date, order: DESC }) {
+      edges {
+        node {
+          id
           title
+          slug
           description
+          date(formatString: "YYYY, MMMM DD")
           tags
+          blogContent {
+            childMarkdownRemark {
+              html
+            }
+          }
         }
       }
     }

@@ -1,7 +1,7 @@
 const path = require(`path`)
 const { createFilePath } = require(`gatsby-source-filesystem`)
 
-exports.createPages = async ({ graphql, actions, reporter }) => {
+exports.createPages = async ({ page, graphql, actions, reporter }) => {
   const { createPage } = actions
 
   // Define a template for blog post
@@ -11,14 +11,20 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   const result = await graphql(
     `
       {
-        allMarkdownRemark(
-          sort: { fields: [frontmatter___date], order: ASC }
-          limit: 1000
-        ) {
-          nodes {
-            id
-            fields {
+        allContentfulVtMorgonBlog(sort: { fields: date, order: DESC }) {
+          edges {
+            node {
+              id
+              title
               slug
+              description
+              date
+              tags
+              blogContent {
+                childMarkdownRemark {
+                  html
+                }
+              }
             }
           }
         }
@@ -34,7 +40,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     return
   }
 
-  const posts = result.data.allMarkdownRemark.nodes
+  const posts = result.data.allContentfulVtMorgonBlog.edges
 
   // Create blog posts pages
   // But only if there's at least one markdown file found at "content/blog" (defined in gatsby-config.js)
@@ -42,35 +48,35 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 
   if (posts.length > 0) {
     posts.forEach((post, index) => {
-      const previousPostId = index === 0 ? null : posts[index - 1].id
-      const nextPostId = index === posts.length - 1 ? null : posts[index + 1].id
-
       createPage({
-        path: post.fields.slug,
+        path: post.node.slug,
         component: blogPost,
+        ...page,
         context: {
-          id: post.id,
-          previousPostId,
-          nextPostId,
+          id: post.node.id,
+          slug: post.node.slug,
+          postIndex: index,
         },
       })
     })
   }
 }
 
-exports.onCreateNode = ({ node, actions, getNode }) => {
-  const { createNodeField } = actions
+// exports.onCreateNode = ({ node, actions, getNode }) => {
+//   const { createNodeField } = actions
 
-  if (node.internal.type === `MarkdownRemark`) {
-    const value = createFilePath({ node, getNode })
+//   if (node.internal.type === `MarkdownRemark`) {
+//   console.log(node.internal.type)
 
-    createNodeField({
-      name: `slug`,
-      node,
-      value,
-    })
-  }
-}
+//     const value = createFilePath({ node, getNode })
+
+//     createNodeField({
+//       name: `slug`,
+//       node,
+//       value,
+//     })
+//   }
+// }
 
 exports.createSchemaCustomization = ({ actions }) => {
   const { createTypes } = actions
