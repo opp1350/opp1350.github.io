@@ -98,7 +98,7 @@ export const pageQuery = graphql`
         }
       }
     }
-    allContentfulVtMorgonBlog {
+    allContentfulVtMorgonBlog(sort: { fields: date, order: DESC }) {
       edges {
         next {
           id
