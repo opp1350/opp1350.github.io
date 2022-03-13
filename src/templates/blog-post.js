@@ -9,8 +9,7 @@ import Comment from "../components/comments"
 const BlogPostTemplate = ({ data, location, pageContext }) => {
   const post = data.contentfulVtMorgonBlog
   const siteTitle = data.site.siteMetadata?.title || `Title`
-  const postNav = data.allContentfulVtMorgonBlog.edges[pageContext.postIndex]
-  const { previous, next } = postNav
+  const { prev, next } = pageContext
   return (
     <Layout location={location} title={siteTitle}>
       <Seo title={post.title} description={post.description || post.excerpt} />
@@ -57,9 +56,9 @@ const BlogPostTemplate = ({ data, location, pageContext }) => {
           }}
         >
           <li>
-            {previous && (
-              <Link to={previous.slug} rel="prev">
-                ← {previous.title}
+            {prev && (
+              <Link to={prev.slug} rel="prev">
+                ← {prev.title}
               </Link>
             )}
           </li>
@@ -95,20 +94,6 @@ export const pageQuery = graphql`
       blogContent {
         childMarkdownRemark {
           html
-        }
-      }
-    }
-    allContentfulVtMorgonBlog(sort: { fields: date, order: DESC }) {
-      edges {
-        next {
-          id
-          title
-          slug
-        }
-        previous {
-          id
-          title
-          slug
         }
       }
     }
