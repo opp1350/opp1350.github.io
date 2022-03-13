@@ -399,7 +399,9 @@ a:focus {
 }
 
 .blog-post img {
+  display: block;
   max-width: 100%;
+  margin: 0 auto;
 }
 
 .blog-post *:not(.gatsby-highlight) code[class*="language-"],
@@ -427,8 +429,5 @@ a:focus {
   ul,
   ol {
     list-style-position: inside;
-  }
-  .blog-post img {
-    max-width: 100%;
   }
 }
