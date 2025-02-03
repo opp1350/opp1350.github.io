@@ -85,12 +85,12 @@ body {
   font-size: var(--fontSize-1);
   font-weight: var(--fontWeight-medium);
   color: var(--color-text);
-  background: linear-gradient(
+  /* background: linear-gradient(
       to bottom,
       rgb(239 242 244 / 0.8),
       rgb(255 255 255 / 0.1)
     ),
-    url(https://grainy-gradients.vercel.app/noise.svg);
+    url(https://grainy-gradients.vercel.app/noise.svg); */
 }
 
 footer {
