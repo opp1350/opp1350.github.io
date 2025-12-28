@@ -1,37 +1,45 @@
 import * as React from 'react'
-import { graphql } from 'gatsby'
+import { graphql, Link } from 'gatsby'
 import Bio from '../components/bio'
 import Layout from '../components/layout'
 import Seo from '../components/seo'
 import PostListView from '../components/PostListView'
-import Tags from '../components/Tags'
 import { Post } from '../types/post'
 
-const BlogIndex = ({ data, location }) => {
-    const siteTitle = data?.site?.siteMetadata?.title || `Title`
-    const posts = data?.allContentfulVtMorgonBlog?.edges as Post[]
+const TagPostListTemplate = ({ data, location, pageContext }) => {
+    const siteTitle = data.site.siteMetadata?.title || `Title`
+    const posts = data.allContentfulVtMorgonBlog.edges as Post[]
+    const tag = pageContext.tag as string
 
     return (
         <Layout location={location} title={siteTitle}>
-            <Seo title="All posts" />
+            <Seo title={`#${tag}`} />
             <Bio />
             <hr />
-            <Tags />
+
+            <header>
+                <h1>#{tag}</h1>
+                <Link to="/">전체 글 보기</Link>
+            </header>
+
             <PostListView posts={posts} />
         </Layout>
     )
 }
 
-export default BlogIndex
+export default TagPostListTemplate
 
 export const pageQuery = graphql`
-    query {
+    query TagPostListByTag($tag: String!) {
         site {
             siteMetadata {
                 title
             }
         }
-        allContentfulVtMorgonBlog(sort: { date: DESC }) {
+        allContentfulVtMorgonBlog(
+            sort: { date: DESC }
+            filter: { tags: { in: [$tag] } }
+        ) {
             edges {
                 node {
                     id
@@ -42,7 +50,7 @@ export const pageQuery = graphql`
                     tags
                     blogContent {
                         childMarkdownRemark {
-                            html
+                            excerpt(pruneLength: 160)
                         }
                     }
                 }
