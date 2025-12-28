@@ -1,11 +1,14 @@
 const path = require(`path`)
-const { createFilePath } = require(`gatsby-source-filesystem`)
 
 exports.createPages = async ({ graphql, actions, reporter }) => {
     const { createPage } = actions
 
     // Define a template for blog post
-    const blogPost = path.resolve(`./src/templates/blog-post.js`)
+    const blogPost = path.resolve(`./src/templates/blog-post.tsx`)
+    const tagPostList = path.resolve(`./src/templates/tag-post-list.tsx`)
+    const tagIndex = path.resolve(`./src/templates/tag-index.tsx`)
+    const tagToPathSegment = (tag) =>
+        String(tag).trim().normalize('NFC').replace(/\//g, '-')
 
     // Get all markdown blog posts sorted by date
     const result = await graphql(`
@@ -40,6 +43,75 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 
     const posts = result.data.allContentfulVtMorgonBlog.edges
 
+    // Create tag pages: /tags/<tag>/ and tag index: /tags/
+    // Prefer GraphQL aggregation (group) if available; otherwise fall back to scanning posts.
+    let sortedTags = []
+
+    const tagGroupResult = await graphql(`
+        {
+            allContentfulVtMorgonBlog {
+                group(field: { tags: SELECT }) {
+                    fieldValue
+                    totalCount
+                }
+            }
+        }
+    `)
+
+    if (
+        !tagGroupResult.errors &&
+        tagGroupResult.data?.allContentfulVtMorgonBlog?.group
+    ) {
+        sortedTags = tagGroupResult.data.allContentfulVtMorgonBlog.group
+            .filter(
+                (g) =>
+                    typeof g.fieldValue === 'string' &&
+                    g.fieldValue.trim().length > 0,
+            )
+            .map((g) => ({
+                tag: g.fieldValue.trim(),
+                count: g.totalCount || 0,
+            }))
+            .sort((a, b) => a.tag.localeCompare(b.tag))
+    } else {
+        // Fallback: scan all posts
+        const tagCounts = new Map()
+        posts.forEach((edge) => {
+            const tags = edge?.node?.tags || []
+            tags.forEach((t) => {
+                if (typeof t === 'string' && t.trim().length > 0)
+                    tagCounts.set(t.trim(), (tagCounts.get(t.trim()) || 0) + 1)
+            })
+        })
+
+        sortedTags = Array.from(tagCounts.entries())
+            .sort((a, b) => a[0].localeCompare(b[0]))
+            .map(([tag, count]) => ({ tag, count }))
+    }
+
+    const sortedTagsWithPath = sortedTags.map(({ tag, count }) => ({
+        tag,
+        count,
+        tagPath: tagToPathSegment(tag),
+    }))
+
+    // Tag index page: /tags/
+    createPage({
+        path: `/tags/`,
+        component: tagIndex,
+    })
+
+    // Tag pages: /tags/<tag>/
+    sortedTagsWithPath.forEach(({ tag, tagPath }) => {
+        createPage({
+            path: `/tags/${tagPath}/`,
+            component: tagPostList,
+            context: {
+                tag,
+            },
+        })
+    })
+
     // Create blog posts pages
     // But only if there's at least one markdown file found at "content/blog" (defined in gatsby-config.js)
     // `context` is available in the template as a prop and as a variable in GraphQL
@@ -61,22 +133,6 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
         })
     }
 }
-
-// exports.onCreateNode = ({ node, actions, getNode }) => {
-//   const { createNodeField } = actions
-
-//   if (node.internal.type === `MarkdownRemark`) {
-//   console.log(node.internal.type)
-
-//     const value = createFilePath({ node, getNode })
-
-//     createNodeField({
-//       name: `slug`,
-//       node,
-//       value,
-//     })
-//   }
-// }
 
 exports.createSchemaCustomization = ({ actions }) => {
     const { createTypes } = actions
